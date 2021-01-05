@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run: composer install --no-interaction --no-suggest
-      - run: php artisan key:generate
+      - run: php artisan key:generate --env=testing
       - run: ./vendor/bin/phpunit
 
   # Branch Jobs
