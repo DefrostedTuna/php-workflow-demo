@@ -1,62 +1,13 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# PHP Workflow Demo
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is simply a project to test out some new workflow practices.
 
-## About Laravel
+The branching strategy used here will follow the Gitflow standard where there is a long lived `master` and `develop` branch. Feature branches are merged to `develop` and when `develop` is ready for a release, the current state of `develop` will be merged down to `master` where a release will take place in the form of a `tag`. 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This release will be automated via CI/CD and will be governed by [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) and [Standard Version](https://github.com/conventional-changelog/standard-version). Conventional Commits will be set up to adhere to a specific standard, which will be used to help generate proper version numbers and changelogs. Standard version will hook into the conventions put in place by Conventional Commits and will take advantage of CI/CD to perform the release and generate the changelog contents.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Builds will also be done for the `develop` branch in a similar fashion. Development builds will be versioned based on the commit hash of the most recent commit to the `develop` branch, rather than based on [SemVer](https://semver.org/). These development releases will not have a Git tag associated with them and will only contain a Docker image within the Docker Registry.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Deployments will take place automatically via CI/CD as well and will be staged on a Kubernetes cluster as a Docker image. As previously stated, commits pushed to the `develop` branch will automatically have Docker images built and pushed to the Docker registry with the tag being governed by the commit hash. When these images are pushed, they will be automatically detected and deployed to Kubernetes. 
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Likewise, when a commit is pushed to `master`, the CI/CD pipeline will build a Docker image using the commit hash, while also using Standard Version to generate a Git tag and changelog. When the Git tag created by Standard Version is pushed to source control, it will have a Docker image built using the Git tag as the Docker tag. This tagged release will follow SemVer and will then be deployed to the Kubernetes cluster if it fits the schema defined in the cluster's config.
