@@ -62,7 +62,7 @@ jobs:
       # so that the .git folder is cloned along with the repository.
       - name: Install Dependencies
         run: |
-          apk add --no-cache git
+          apk add --no-cache git openssh
           yarn global add standard-version
 
       - name: Checkout Code
