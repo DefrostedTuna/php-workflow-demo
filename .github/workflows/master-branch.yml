@@ -69,7 +69,7 @@ jobs:
           yarn global add standard-version
 
       - name: Create Release
-      - run: | 
+        run: | 
           git config user.name github-actions
           git config user.email github-actions@github.com
           standard-version -t ""
