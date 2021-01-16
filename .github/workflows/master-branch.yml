@@ -50,7 +50,7 @@ jobs:
 
   # This will only run on the `master` branch when the commit does not mention release.
   create-release:
-    if: !contains(github.event.head_commit.message, 'chore(release):')
+    if: "!contains(github.event.head_commit.message, 'chore(release):')"
     name: Create Release
     runs-on: ubuntu-latest
     needs: unit-tests
