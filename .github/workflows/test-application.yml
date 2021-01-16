@@ -1,0 +1,30 @@
+name: Test Application
+
+on:
+  push:
+    branches-ignore:
+      - master  # Ignore master because there is another workflow to handle this.
+      - develop # Ignore develop because there is another workflow to handle this.
+  pull_request:
+  
+jobs:
+  unit-tests:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    container:
+      image: php:7.3-alpine3.13
+  
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Install Composer
+      run: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+    - name: Install Dependencies
+      run: composer install --no-interaction --no-suggest
+
+    - name: Run Unit Tests
+      run: |
+        php artisan key:generate --env=testing
+        vendor/bin/phpunit
