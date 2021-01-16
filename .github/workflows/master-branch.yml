@@ -67,6 +67,8 @@ jobs:
 
       - name: Checkout Code
         uses: actions/checkout@v2
+        with:
+          ssh-key: ${{ secrets.SSH_DEPLOY_KEY }}
 
       - name: Create Release
         run: | 
