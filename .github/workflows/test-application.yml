@@ -9,6 +9,7 @@ on:
   
 jobs:
   unit-tests:
+    if: "!contains(github.event.head_commit.message, '[skip-ci]')"
     name: Run Unit Tests
     runs-on: ubuntu-latest
     container:

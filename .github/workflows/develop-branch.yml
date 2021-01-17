@@ -7,6 +7,7 @@ on:
   
 jobs:
   unit-tests:
+    if: "!contains(github.event.head_commit.message, '[skip-ci]')"
     name: Run Unit Tests
     runs-on: ubuntu-latest
     container:
@@ -27,6 +28,7 @@ jobs:
         vendor/bin/phpunit
 
   build-image:
+    if: "!contains(github.event.head_commit.message, '[skip-ci]')"
     name: Build Docker Image
     runs-on: ubuntu-latest
     needs: unit-tests
