@@ -53,7 +53,7 @@ jobs:
   # When this changelog is pushed to master, we DO NOT want to trigger
   # another release automatically. We want to ignore this commit specifically.
   create-release:
-    if: "!contains(github.event.head_commit.message, 'chore(release):')" && "!contains(github.event.head_commit.message, '[skip-ci]')"
+    if: "!contains(github.event.head_commit.message, 'chore(release):') && !contains(github.event.head_commit.message, '[skip-ci]')"
     name: Create Release
     runs-on: ubuntu-latest
     needs: unit-tests
