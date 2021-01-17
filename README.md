@@ -1,5 +1,10 @@
 # PHP Workflow Demo
 
+<p align="center">
+  <img src="https://img.shields.io/github/workflow/status/DefrostedTuna/php-workflow-demo/Master%20Workflow?style=flat-square" alt="Build Status">
+</p>
+
+
 This is simply a project to test out some new workflow practices.
 
 The branching strategy used here will follow the Gitflow standard where there is a long lived `master` and `develop` branch. Feature branches are merged to `develop` and when `develop` is ready for a release, the current state of `develop` will be merged down to `master` where a release will take place in the form of a `tag`. 
