@@ -1,4 +1,6 @@
 # Changelog
+### [1.0.2](https://github.com/DefrostedTuna/php-workflow-demo/compare/1.0.1...1.0.2) (2021-01-17)
+
 ### 1.0.1 (2021-01-17)
 
 ### 1.0.1 (2021-01-17)
