@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,8 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/status', function () {
-    return response()->json([
+    return new JsonResponse([
         'status' => 'OK',
         'code' => 200,
-    ]);
+    ], 200);
 });
