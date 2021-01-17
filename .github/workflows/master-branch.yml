@@ -31,7 +31,7 @@ jobs:
   # This is so that we capture the updated changelog after a release has been made.
   # Building an image before a release will result in duplicate images with minor differences.
   build-image:
-    if: contains(github.event.head_commit.message, 'chore(release):') && "!contains(github.event.head_commit.message, '[skip-ci]')"
+    if: "contains(github.event.head_commit.message, 'chore(release):') && !contains(github.event.head_commit.message, '[skip-ci]')"
     name: Build Docker Image
     runs-on: ubuntu-latest
     needs: unit-tests
