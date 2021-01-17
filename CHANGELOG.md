@@ -1,4 +1,11 @@
 # Changelog
+### [0.1.4](https://github.com/DefrostedTuna/php-workflow-demo/compare/0.1.3...0.1.4) (2021-01-17)
+
+
+### Documentation Updates
+
+* add status badge ([#39](https://github.com/DefrostedTuna/php-workflow-demo/issues/39)) ([34aeb42](https://github.com/DefrostedTuna/php-workflow-demo/commit/34aeb429abbc630351ec7b215c7c22cdd033cdf4))
+
 ### [0.1.3](https://github.com/DefrostedTuna/php-workflow-demo/compare/0.1.2...0.1.3) (2021-01-17)
 
 ### [0.1.2](https://github.com/DefrostedTuna/php-workflow-demo/compare/0.1.1...0.1.2) (2021-01-17)
