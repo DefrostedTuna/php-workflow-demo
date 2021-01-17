@@ -12,6 +12,11 @@
       "hidden": false
     },
     {
+      "type": "docs",
+      "section": "Documentation Updates",
+      "hidden": false
+    },
+    {
       "type": "build",
       "section": "Build System",
       "hidden": true
