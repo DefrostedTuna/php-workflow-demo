@@ -64,8 +64,8 @@ jobs:
         run: |
           apk add --no-cache git openssh
           yarn global add standard-version
-          git config user.name "Github Actions"
-          git config user.email github-actions@github.com
+          git config --global user.name "Github Actions"
+          git config --global user.email github-actions@github.com
 
       - name: Checkout Code
         uses: actions/checkout@v2
