@@ -1,9 +1,9 @@
-name: Develop Workflow
+name: Tag Workflow
 
 on:
   push:
-    branches:
-      - develop
+    tags:
+      - '*'
   
 jobs:
   unit-tests:
@@ -25,7 +25,7 @@ jobs:
       run: |
         php artisan key:generate --env=testing
         vendor/bin/phpunit
-
+        
   build-image:
     name: Build Docker Image
     runs-on: ubuntu-latest
@@ -38,7 +38,7 @@ jobs:
         run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login ${{ secrets.DOCKER_SERVER }} -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
       - name: Build Container
-        run: docker build -t ${{ secrets.DOCKER_SERVER }}/defrostedtuna/php-workflow-demo:$(echo $GITHUB_REF | awk -F "/" '{print $3}')-$(echo $GITHUB_SHA | cut -c -7) .
+        run: docker build -t ${{ secrets.DOCKER_SERVER }}/defrostedtuna/php-workflow-demo:$(echo $GITHUB_REF | awk -F "/" '{print $3}') .
 
       - name: Push Container
-        run: docker push ${{ secrets.DOCKER_SERVER }}/defrostedtuna/php-workflow-demo:$(echo $GITHUB_REF | awk -F "/" '{print $3}')-$(echo $GITHUB_SHA | cut -c -7)
+        run: docker push ${{ secrets.DOCKER_SERVER }}/defrostedtuna/php-workflow-demo:$(echo $GITHUB_REF | awk -F "/" '{print $3}')
